@@ -6,3 +6,12 @@ const registerServiceWorker = () => {
     .catch(() => console.log(`👁️ [app.js] SW failed to register`));
 };
 registerServiceWorker();
+
+const button = document.querySelector("button");
+button.addEventListener("click", async () => {
+  const response = await fetch(
+    `${document.location.origin}/api/generated/json`
+  );
+  const profileData = await response.json();
+  console.log(profileData);
+});
