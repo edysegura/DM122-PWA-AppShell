@@ -13,4 +13,7 @@ button.addEventListener("click", async () => {
   const response = await fetch(url);
   const profileData = await response.json();
   console.log(profileData);
+  const img = document.querySelector("img");
+  img.src = profileData.profilePicture;
+  img.alt = `Picture of ${profileData.name}`;
 });
