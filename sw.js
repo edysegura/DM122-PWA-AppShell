@@ -10,6 +10,7 @@ const assetsToCache = [
   "src/assets/images/pwa-logo.png",
   "src/assets/js/material.min.js",
   "src/js/app.js",
+  "src/js/mock-api.js",
   "src/offline.html",
   "favicon.ico",
   "index.html",
