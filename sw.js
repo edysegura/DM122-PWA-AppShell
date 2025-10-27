@@ -8,6 +8,8 @@ const assetsToCache = [
   "https://fonts.googleapis.com/css?family=Roboto:400,700",
   "https://fonts.googleapis.com/icon?family=Material+Icons",
   "src/assets/images/pwa-logo.png",
+  "src/assets/images/offline.svg",
+  "src/assets/images/cat.jpg",
   "src/assets/js/material.min.js",
   "src/js/app.js",
   "src/js/mock-api.js",
