@@ -20,7 +20,7 @@ export default class HtmlService {
     console.log(`👁️ [HtmlService.js] adding new task: ${task}`);
     const randomID = window.crypto.randomUUID();
     const taskHtml = `
-      <li>
+      <li id="${randomID}" onclick="this.classList.toggle('done')">
         <span>${task}</span>
         <button onclick="htmlService.deleteTask('${randomID}')">❌</button>
       </li>
@@ -30,5 +30,6 @@ export default class HtmlService {
 
   deleteTask(taskId) {
     console.log(`👁️ [HtmlService.js] I was called to delete ${taskId}`);
+    document.getElementById(taskId).remove();
   }
 }
