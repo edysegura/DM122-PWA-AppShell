@@ -23,7 +23,7 @@ const assetsToCache = [
 
 self.addEventListener("install", (event) => {
   console.log(`👁️ [sw.js] installing static assets...`);
-  // self.skipWaiting();
+  self.skipWaiting();
   event.waitUntil(cacheStaticAssets());
 });
 
@@ -35,7 +35,6 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const request = event.request;
   console.log(`👁️ [sw.js] request: ${request.url}`);
-  // console.log(`👁️ [sw.js] accept: ${request.headers.get("accept")}`);
   event.respondWith(proxy(request));
 });
 
@@ -47,9 +46,6 @@ async function cacheStaticAssets() {
 async function proxy(request) {
   console.log(`👁️ [sw.js] proxying...`);
   const url = new URL(request.url);
-  if (url.pathname === "/id/237/200/300") {
-    return replaceDogByCat();
-  }
   if (url.pathname.startsWith("/api/profile")) {
     return mockProfileAPI();
   }
@@ -61,13 +57,9 @@ async function networkFirst(request) {
     return await fetch(request);
   } catch (error) {
     const cache = await caches.open(cacheName);
-    return cache.match("src/offline.html");
+    if (request.headers.get("accept").startsWith("image/")) {
+      return cache.match("src/assets/images/offline.svg");
+    }
+    return cache.match(request.url);
   }
-}
-
-async function replaceDogByCat() {
-  console.log(`👁️ [sw.js] replacing dog for a cat`);
-  return fetch(
-    "https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg"
-  );
 }
