@@ -1,6 +1,6 @@
 import { mockProfileAPI } from "./src/js/mock-api.js";
 
-const cacheName = "app-shell-v2";
+const cacheName = "app-shell-v4";
 const assetsToCache = [
   "https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css",
   "https://fonts.gstatic.com/s/materialicons/v55/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2",
@@ -71,7 +71,8 @@ async function networkFirst(request) {
     return await fetch(request);
   } catch (error) {
     const cache = await caches.open(cacheName);
-    if (request.headers.get("accept").startsWith("image/")) {
+    const responseCached = await cache.match(request.url);
+    if (!responseCached && request.headers.get("accept").startsWith("image/")) {
       return cache.match("src/assets/images/offline.svg");
     }
     return cache.match(request.url);
