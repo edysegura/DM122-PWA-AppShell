@@ -13,6 +13,7 @@ const assetsToCache = [
   "src/assets/images/offline.svg",
   "src/assets/images/cat.jpg",
   "src/assets/js/material.min.js",
+  "src/css/style.css",
   "src/js/app.js",
   "src/js/mock-api.js",
   "src/offline.html",
