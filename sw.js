@@ -60,9 +60,6 @@ async function cacheCleanup() {
 async function proxy(request) {
   console.log(`👁️ [sw.js] proxying...`);
   const url = new URL(request.url);
-  if (url.pathname.startsWith("/api/profile")) {
-    return mockProfileAPI();
-  }
   return networkFirst(request);
 }
 
